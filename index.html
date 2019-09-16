@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>JsM3</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <link href="lib/fontawesome5/css/all.css" rel="stylesheet" />
+  <link href="./css/style.css" rel="stylesheet" />
+  <link href="./lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+  <link href="./lib/floatb/floatbutton.css" rel="stylesheet" />
+  <script>window.$ = window.jQuery = require("jquery");</script>
+  <script src="./lib/bootstrap/js/bootstrap.js"></script>
+  <script src="./lib/json_editor2/json_editor.js"></script>
+  <script src="lib/ace/ace.js" charset="utf-8"></script>
+  <script src="lib/ace/mode-javascript.js" charset="utf-8"></script>
+  <script src="lib/ace/theme-twilight.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <div class="pane left">
+    <ul class="breadcrumb">
+      <li><a href="#">root</a></li>
+    </ul>
+    <div id="editor_holder"></div>
+  </div>
+  <div class="pane right">
+    <ul class="nav nav-tabs" style="height: 41px;">
+      <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+      <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+      <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+      <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    </ul>
+    <div style="height: 100%; width: 100%;" class="tab-content">
+      <div id="home" style="height: 100%; width: 100%;" class="tab-pane fade in active">
+        <div id="editor" class="editor"></div>
+      </div>
+      <div id="menu1" class="tab-pane fade">
+        <h3>Menu 1</h3>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <div id="menu2" class="tab-pane fade">
+        <h3>Menu 2</h3>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+          aperiam.</p>
+      </div>
+      <div id="menu3" class="tab-pane fade">
+        <h3>Menu 3</h3>
+        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      </div>
+    </div>
+  </div>
+  <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="fa fa-user"></i>
+    </a>
+    <ul id="functions"></ul>
+  </div>
+  <script src="./lib/floatb/floatbutton.js"></script>
+  <script src="render.js"></script>
+</body>
+
+</html>

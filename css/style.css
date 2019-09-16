@@ -1,0 +1,68 @@
+#editor_holder {
+  padding-top: 30px;
+}
+
+.breadcrumb {
+  z-index: 10;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+ul.breadcrumb {
+  list-style: none;
+  background-color: #eee;
+}
+
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  color: black;
+  content: "/\00a0";
+}
+
+ul.breadcrumb li a {
+  color: #0275d8;
+  text-decoration: none;
+}
+
+ul.breadcrumb li a:hover {
+  color: #01447e;
+  text-decoration: underline;
+}
+
+.editor {
+  background: black;
+  width: 100%;
+  height: 100%;
+}
+
+.jsoneditor-search input {
+  color: black;
+}
+
+.pane {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  /* z-index: 1; */
+  /* overflow-x: hidden; */
+}
+
+/* Control the left side */
+.left {
+  overflow: scroll;
+  width: 50%;
+  left: 0;
+}
+
+/* Control the right side */
+.right {
+  width: 50%;
+  right: 0;
+}

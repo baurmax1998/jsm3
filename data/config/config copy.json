@@ -1,0 +1,1 @@
+{"name":"max","loadings":["./data/code/files.js","./data/code/code_files.js"],"functions":["./data/code/edit_code.js"],"dynamic":{"files":["test.txt","test2.txt"],"code_files":["code_files.js","db.js","external.js","files.js","loadexternal.js","square.js","test.js"]}}

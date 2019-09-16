@@ -1,0 +1,22 @@
+{
+  "name": "jsm3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "max",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^6.0.7",
+    "jquery": "^3.4.1",
+    "jsdoc-parse": "^4.0.1",
+    "jsdoc3-parser": "^2.0.0",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.7.0",
+    "photon": "^2.1.0",
+    "sequelize": "^5.18.0"
+  }
+}
