@@ -1,10 +1,13 @@
 
-process.on('message', (msg) => {
-  console.log('Message from parent:', msg);
-});
-
-let counter = 0;
-
-setInterval(() => {
-  process.send({ counter: counter++ });
-}, 1000);
+    /**
+  * @name square
+  * @function
+  * @description calc the surface of a square
+  * @param {nummber} a one side
+  * @param {nummber} b other side
+  * @returns {number}
+  */
+ function square(a, b) {
+   return a * b;
+ }    process.send({ result: square(12, 12) })
+    

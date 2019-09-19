@@ -4,6 +4,10 @@ const parser = require("jsdoc3-parser");
 const electron = require("electron");
 const remote = electron.remote;
 const { fork } = require("child_process");
+var Sqrl = require("squirrelly");
+// let myTemplate = 'Hi, my name is {{name}}'
+// let compiled = Sqrl.Compile(myTemplate)
+// console.log(compiled({ name: 'Johnny Appleseed' }, Sqrl))
 
 JSONEditor.defaults.editors.object.options.collapsed = true;
 JSONEditor.defaults.editors.array.options.collapsed = true;
@@ -15,17 +19,30 @@ var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
 var editorInstance = ace.edit("editor");
 editorInstance.setTheme("ace/theme/twilight");
 editorInstance.session.setMode(new JavaScriptMode());
-editorInstance.setValue(`
-process.on('message', (msg) => {
-  console.log('Message from parent:', msg);
-});
+editorInstance.setValue(
+  `/**
+  * @name square
+  * @function
+  * @description calc the surface of a square
+  * @param {nummber} a one side
+  * @param {nummber} b other side
+  * @returns {number}
+  */
+ function square(a, b) {
+   return a * b;
+ }`
+);
+// `
+// process.on('message', (msg) => {
+//   console.log('Message from parent:', msg);
+// });
 
-let counter = 0;
+// let counter = 0;
 
-setInterval(() => {
-  process.send({ counter: counter++ });
-}, 1000);
-`)
+// setInterval(() => {
+//   process.send({ counter: counter++ });
+// }, 1000);
+// `
 
 String.prototype.replaceAll = function(search, replacement) {
   var target = this;
@@ -61,32 +78,46 @@ function functions() {
   });
 
   $("#playf").on("click", function() {
-    console.log("play");
+    let playPath = "./data/code/square.js";
+    console.log("play" + playPath);
     let code = editorInstance.getValue();
-    let tempFile = "child.js";
-    fs.writeFile(tempFile, code, "utf8", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      let forked = fork(tempFile);
+    writeAndParse(playPath, code, function(doc) {
+      excecuteJS(code, doc);
+    });
+  });
+}
 
-      forked.on("message", msg => {
-        console.log("Message from child", msg);
-      });
+function excecuteJS(code, doc) {
+  let myTemplate = `
+      {{code}}
+      process.send({ result: square(12, 12) })
+      `;
+  let compiled = Sqrl.Compile(myTemplate);
+  let wrappedCode = compiled({ code: code }, Sqrl);
+  let tempFile = "child.js";
+  fs.writeFile(tempFile, wrappedCode, "utf8", function(err) {
+    if (err) return console.log(err);
+    let forked = fork(tempFile);
+    forked.on("message", msg => {
+      console.log("Message from child", msg);
+    });
+    forked.on("exit", function(code, signal) {
+      console.log(
+        "child process exited with " + `code ${code} and signal ${signal}`
+      );
+    });
+    // forked.send({ hello: "world" });
+    // setTimeout(function (){
+    //   forked.kill()
+    // }, 5000);
+  });
+}
 
-      forked.on('exit', function (code, signal) {
-        console.log('child process exited with ' +
-                    `code ${code} and signal ${signal}`);
-      });
-
-      forked.send({ hello: "world" });
-
-      setTimeout(function (){
-
-        forked.kill()
-      
-      }, 5000);
-
+function writeAndParse(path, text, callback) {
+  fs.writeFile(path, text, "utf8", function(err) {
+    parser(path, function(error, ast) {
+      let doc = findDoc(ast, playPath);
+      callback(doc);
     });
   });
 }
